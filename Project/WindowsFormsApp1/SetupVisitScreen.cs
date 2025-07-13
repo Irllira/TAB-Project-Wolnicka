@@ -36,25 +36,11 @@ namespace WindowsFormsApp1
         {
             lWarning.Hide();
 
-           
-            DAO myDAO = new DAO();
-            doctorBindingSource.DataSource = myDAO.GetDoctors();
-            doctors = myDAO.GetDoctors();
-            string s;
-            foreach (Doctor d in doctors)
-            {
-                s = d.employeeID.ToString()+ "   "+ d.lastName;
-                lbDoctor.Items.Add(s);
-            }
-          
-            DAO myDAO2 = new DAO();
-            patientBindingSource.DataSource = myDAO2.GetPatients();
-            patients = myDAO2.GetPatients();
-            foreach (Patient p in patients)
-            {
-                s = p.patientID.ToString()+ "   "+ p.lastName;
-                lbPatients.Items.Add(s);
-            }
+            FindPatients("");
+            FindDoctors("");
+
+
+            SetTime();
 
             lPatientInfo.Text = " ";
 
@@ -115,6 +101,65 @@ namespace WindowsFormsApp1
                     lWarning.Text = "Visit was successfully set up";
                     lWarning.Show();
                 }
+            }
+        }
+
+        private void tbDoctorLookUp_TextChanged(object sender, EventArgs e)
+        {
+            FindDoctors(tbDoctorLookUp.Text);
+        }
+
+        private void tbPatientLookUp_TextChanged(object sender, EventArgs e)
+        {
+            FindPatients(tbPatientLookUp.Text);
+        }
+
+        private void FindPatients(string name)
+        {
+            lbPatients.Items.Clear();
+            patients.Clear();
+
+            DAO myDAO2 = new DAO();
+            patientBindingSource.DataSource = myDAO2.GetPatients();
+            patients = myDAO2.GetPatients();
+            string s;
+
+            foreach (Patient p in patients)
+            {
+                if (p.lastName.Contains(name) || name == "")
+                {
+                    s = p.patientID.ToString() + "   " + p.lastName;
+                    lbPatients.Items.Add(s);
+                }
+            }
+        }
+
+        private void FindDoctors(string name)
+        {
+            lbDoctor.Items.Clear();
+            doctors.Clear();
+
+            DAO myDAO = new DAO();
+            doctorBindingSource.DataSource = myDAO.GetDoctors();
+            doctors = myDAO.GetDoctors();
+            string s;
+            foreach (Doctor d in doctors)
+            {
+                if (d.lastName.Contains(name) || name == "")
+                {
+                    s = d.employeeID.ToString() + "   " + d.lastName;
+                    lbDoctor.Items.Add(s);
+                }
+            }
+        }
+
+        private void SetTime()
+        {
+            cbTime.Items.Clear();
+            for(int i=8; i<=16; i++)
+            {
+                cbTime.Items.Add(i + ":00");
+                cbTime.Items.Add(i + ":30");
             }
         }
     }

@@ -58,6 +58,8 @@ namespace WindowsFormsApp1
             this.cbExamType = new System.Windows.Forms.ComboBox();
             this.lExamType = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.lDate = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvExams)).BeginInit();
             this.SuspendLayout();
@@ -337,12 +339,34 @@ namespace WindowsFormsApp1
             this.label8.TabIndex = 30;
             this.label8.Text = "Exams:";
             // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label9.Location = new System.Drawing.Point(468, 12);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(50, 20);
+            this.label9.TabIndex = 31;
+            this.label9.Text = "Date:";
+            // 
+            // lDate
+            // 
+            this.lDate.AutoSize = true;
+            this.lDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.lDate.Location = new System.Drawing.Point(524, 12);
+            this.lDate.Name = "lDate";
+            this.lDate.Size = new System.Drawing.Size(85, 20);
+            this.lDate.TabIndex = 32;
+            this.lDate.Text = "xx-xx-xxxx";
+            // 
             // VisitScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.ClientSize = new System.Drawing.Size(800, 460);
+            this.Controls.Add(this.lDate);
+            this.Controls.Add(this.label9);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.lExamType);
             this.Controls.Add(this.cbExamType);
@@ -410,5 +434,7 @@ namespace WindowsFormsApp1
         private System.Windows.Forms.ComboBox cbExamType;
         protected internal System.Windows.Forms.Label lExamType;
         private System.Windows.Forms.Label label8;
+        protected internal System.Windows.Forms.Label label9;
+        protected internal System.Windows.Forms.Label lDate;
     }
 }

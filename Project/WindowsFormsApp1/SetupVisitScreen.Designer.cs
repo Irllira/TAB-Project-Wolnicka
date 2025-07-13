@@ -41,13 +41,18 @@ namespace WindowsFormsApp1
             this.lWarning = new System.Windows.Forms.Label();
             this.tbVisitDescription = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.tbPatientLookUp = new System.Windows.Forms.TextBox();
+            this.tbDoctorLookUp = new System.Windows.Forms.TextBox();
+            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.cbTime = new System.Windows.Forms.ComboBox();
+            this.label5 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // bSetupVisit
             // 
             this.bSetupVisit.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.bSetupVisit.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.bSetupVisit.Location = new System.Drawing.Point(217, 372);
+            this.bSetupVisit.Location = new System.Drawing.Point(217, 384);
             this.bSetupVisit.Name = "bSetupVisit";
             this.bSetupVisit.Size = new System.Drawing.Size(128, 49);
             this.bSetupVisit.TabIndex = 0;
@@ -59,7 +64,7 @@ namespace WindowsFormsApp1
             // 
             this.lbPatients.FormattingEnabled = true;
             this.lbPatients.ItemHeight = 16;
-            this.lbPatients.Location = new System.Drawing.Point(44, 219);
+            this.lbPatients.Location = new System.Drawing.Point(41, 242);
             this.lbPatients.Name = "lbPatients";
             this.lbPatients.Size = new System.Drawing.Size(141, 84);
             this.lbPatients.TabIndex = 1;
@@ -69,7 +74,7 @@ namespace WindowsFormsApp1
             // 
             this.lbDoctor.FormattingEnabled = true;
             this.lbDoctor.ItemHeight = 16;
-            this.lbDoctor.Location = new System.Drawing.Point(41, 58);
+            this.lbDoctor.Location = new System.Drawing.Point(41, 80);
             this.lbDoctor.Name = "lbDoctor";
             this.lbDoctor.Size = new System.Drawing.Size(141, 84);
             this.lbDoctor.TabIndex = 2;
@@ -139,7 +144,7 @@ namespace WindowsFormsApp1
             // 
             this.lWarning.AutoSize = true;
             this.lWarning.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.lWarning.Location = new System.Drawing.Point(375, 371);
+            this.lWarning.Location = new System.Drawing.Point(365, 383);
             this.lWarning.Name = "lWarning";
             this.lWarning.Size = new System.Drawing.Size(199, 50);
             this.lWarning.TabIndex = 9;
@@ -148,7 +153,7 @@ namespace WindowsFormsApp1
             // tbVisitDescription
             // 
             this.tbVisitDescription.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.tbVisitDescription.Location = new System.Drawing.Point(370, 314);
+            this.tbVisitDescription.Location = new System.Drawing.Point(360, 333);
             this.tbVisitDescription.Name = "tbVisitDescription";
             this.tbVisitDescription.Size = new System.Drawing.Size(204, 30);
             this.tbVisitDescription.TabIndex = 10;
@@ -157,11 +162,58 @@ namespace WindowsFormsApp1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label1.Location = new System.Drawing.Point(194, 319);
+            this.label1.Location = new System.Drawing.Point(194, 338);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(151, 25);
             this.label1.TabIndex = 11;
             this.label1.Text = "Visit Description";
+            // 
+            // tbPatientLookUp
+            // 
+            this.tbPatientLookUp.Location = new System.Drawing.Point(41, 214);
+            this.tbPatientLookUp.Name = "tbPatientLookUp";
+            this.tbPatientLookUp.Size = new System.Drawing.Size(141, 22);
+            this.tbPatientLookUp.TabIndex = 12;
+            this.tbPatientLookUp.TextChanged += new System.EventHandler(this.tbPatientLookUp_TextChanged);
+            // 
+            // tbDoctorLookUp
+            // 
+            this.tbDoctorLookUp.Location = new System.Drawing.Point(41, 52);
+            this.tbDoctorLookUp.Name = "tbDoctorLookUp";
+            this.tbDoctorLookUp.Size = new System.Drawing.Size(141, 22);
+            this.tbDoctorLookUp.TabIndex = 13;
+            this.tbDoctorLookUp.TextChanged += new System.EventHandler(this.tbDoctorLookUp_TextChanged);
+            // 
+            // dateTimePicker1
+            // 
+            this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dateTimePicker1.Location = new System.Drawing.Point(609, 315);
+            this.dateTimePicker1.Name = "dateTimePicker1";
+            this.dateTimePicker1.Size = new System.Drawing.Size(106, 22);
+            this.dateTimePicker1.TabIndex = 15;
+            // 
+            // cbTime
+            // 
+            this.cbTime.FormattingEnabled = true;
+            this.cbTime.Items.AddRange(new object[] {
+            "8:00",
+            "8:30",
+            "9:00",
+            "9:30"});
+            this.cbTime.Location = new System.Drawing.Point(609, 352);
+            this.cbTime.Name = "cbTime";
+            this.cbTime.Size = new System.Drawing.Size(106, 24);
+            this.cbTime.TabIndex = 16;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label5.Location = new System.Drawing.Point(605, 279);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(129, 20);
+            this.label5.TabIndex = 17;
+            this.label5.Text = "Date and Time: ";
             // 
             // SetupVisitScreen
             // 
@@ -169,6 +221,11 @@ namespace WindowsFormsApp1
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.ClientSize = new System.Drawing.Size(800, 459);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.cbTime);
+            this.Controls.Add(this.dateTimePicker1);
+            this.Controls.Add(this.tbDoctorLookUp);
+            this.Controls.Add(this.tbPatientLookUp);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.tbVisitDescription);
             this.Controls.Add(this.lWarning);
@@ -203,5 +260,10 @@ namespace WindowsFormsApp1
         private System.Windows.Forms.Label lWarning;
         private System.Windows.Forms.TextBox tbVisitDescription;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox tbPatientLookUp;
+        private System.Windows.Forms.TextBox tbDoctorLookUp;
+        private System.Windows.Forms.DateTimePicker dateTimePicker1;
+        private System.Windows.Forms.ComboBox cbTime;
+        private System.Windows.Forms.Label label5;
     }
 }
