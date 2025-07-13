@@ -22,8 +22,11 @@ namespace WindowsFormsApp1
         int patientID = -1;
         int doctorID = -1;
         int receptionistID;
-        
-        List<Patient> patients = new List<Patient>();
+
+        DateTime dateTime;
+        bool isTimeSet = false;
+
+        List <Patient> patients = new List<Patient>();
         List<Doctor> doctors = new List<Doctor>();
 
         public SetupVisitScreen(int i)
@@ -86,22 +89,32 @@ namespace WindowsFormsApp1
                 lWarning.Text = "Choose both \na doctor an a patient";
 
                 lWarning.Show();
+
+                return;
+            }
+
+            if (tbVisitDescription.Text == "")
+            {
+                lWarning.Text = "Fill the visit description";
+                lWarning.Show();
+                return;
+            }
+
+            if (!isTimeSet)
+            {
+                lWarning.Text = "Choose visit date and time";
+                lWarning.Show();
+                return;
             }
             else
             {
-                if (tbVisitDescription.Text == "")
-                {
-                    lWarning.Text = "Fill the visit description";
-                    lWarning.Show();
-                }
-                else
-                {
-                    DAO myDAO = new DAO();
-                    myDAO.AddVisit(patients[patientID].patientID, doctors[doctorID].employeeID, receptionistID, tbVisitDescription.Text);
-                    lWarning.Text = "Visit was successfully set up";
-                    lWarning.Show();
-                }
+                DAO myDAO = new DAO();
+                myDAO.AddVisit(patients[patientID].patientID, doctors[doctorID].employeeID, receptionistID, tbVisitDescription.Text,dateTime);
+                lWarning.Text = "Visit was successfully set up";
+                lWarning.Show();
             }
+
+
         }
 
         private void tbDoctorLookUp_TextChanged(object sender, EventArgs e)
@@ -156,11 +169,69 @@ namespace WindowsFormsApp1
         private void SetTime()
         {
             cbTime.Items.Clear();
-            for(int i=8; i<=16; i++)
+            for(int i=8; i<=18; i++)
             {
                 cbTime.Items.Add(i + ":00");
                 cbTime.Items.Add(i + ":30");
             }
+        }
+
+        private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
+        {
+            isTimeSet = false;
+
+            lWarning.Text = "";
+            lWarning.Hide();
+
+            DateTime now = DateTime.Now;
+            if(dateTimePicker1.Value<now)
+            {
+                lWarning.Text ="The date picked is in the past";
+                lWarning.Show();
+            }
+
+            if (cbTime.SelectedIndex != -1)
+            {
+                CheckVisitTime();
+
+            }
+        }
+
+        private void cbTime_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            isTimeSet = false;
+            lWarning.Text = "";
+            lWarning.Hide();
+
+
+            CheckVisitTime();
+        }
+
+
+        private void CheckVisitTime()
+        {
+            DateTime now = DateTime.Now;
+            DateTime date = dateTimePicker1.Value;
+
+            string buff = date.Year + "-" + date.Month + "-" + date.Day + " " + cbTime.SelectedItem.ToString();
+
+            DateTime time = DateTime.Parse(buff);
+
+            if (time < now)
+            {
+                lWarning.Text = "The date picked is in the past";
+                lWarning.Show();
+                return;
+            }
+            DAO myDAO = new DAO();
+            if (myDAO.FindVisitByTime(doctorID, time))
+            {
+                lWarning.Text = "The date picked is \nalredy taken for this doctor";
+                lWarning.Show();
+                return;
+            }
+            dateTime = time;
+            isTimeSet = true;
         }
     }
 }

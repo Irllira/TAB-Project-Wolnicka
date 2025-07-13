@@ -191,6 +191,7 @@ namespace WindowsFormsApp1
             this.dateTimePicker1.Name = "dateTimePicker1";
             this.dateTimePicker1.Size = new System.Drawing.Size(106, 22);
             this.dateTimePicker1.TabIndex = 15;
+            this.dateTimePicker1.ValueChanged += new System.EventHandler(this.dateTimePicker1_ValueChanged);
             // 
             // cbTime
             // 
@@ -204,6 +205,7 @@ namespace WindowsFormsApp1
             this.cbTime.Name = "cbTime";
             this.cbTime.Size = new System.Drawing.Size(106, 24);
             this.cbTime.TabIndex = 16;
+            this.cbTime.SelectedIndexChanged += new System.EventHandler(this.cbTime_SelectedIndexChanged);
             // 
             // label5
             // 

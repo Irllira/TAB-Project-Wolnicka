@@ -328,7 +328,7 @@ namespace WindowsFormsApp1
             return dataT;
         }
 
-        public Visit FindVisit(int i)
+        public Visit FindVisit(int id)
         {
             Visit vis = new Visit();
             SqlConnection connection = new SqlConnection(ConnectionString);
@@ -336,7 +336,7 @@ namespace WindowsFormsApp1
             connection.Open();
 
             command.CommandText = "SELECT * From VISIT where visit_ID = @visitID";
-            command.Parameters.AddWithValue("@visitID", i);
+            command.Parameters.AddWithValue("@visitID", id);
             command.Connection = connection;
 
             using (SqlDataReader reader = command.ExecuteReader())
@@ -634,10 +634,9 @@ namespace WindowsFormsApp1
             connection.Close();
         }
 
-        public void AddVisit(int patientID, int doctorID, int receptionistID, string description)
+        public void AddVisit(int patientID, int doctorID, int receptionistID, string description, DateTime dateTime)
         {
 
-            DateTime dateTime = DateTime.Now; //current time
             char[] vstatus = { 'R', 'E', 'G', 'I', 'S', 'T', 'E', 'R', 'D' };
 
             SqlConnection connection = new SqlConnection(ConnectionString);
@@ -810,6 +809,32 @@ namespace WindowsFormsApp1
             int i = receptionists.Last<Receptionist>().employeeID;
 
             return i;
+        }
+
+        public bool FindVisitByTime(int doctorID, DateTime date)
+        {
+            SqlConnection connection = new SqlConnection(ConnectionString);
+            SqlCommand command = new SqlCommand();
+            connection.Open();
+
+            command.CommandText = "SELECT VISIT_ID From VISIT where visit_ID = @visitID AND DT_REGISTRATION = @date";
+            command.Parameters.AddWithValue("@visitID", doctorID);
+            command.Parameters.AddWithValue("@date", date);
+            command.Connection = connection;
+
+            using (SqlDataReader reader = command.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    if (!reader.IsDBNull(0))
+                    {
+                        return true;
+                    }
+                }
+            }
+
+            connection.Close();
+            return false;  
         }
 
     }
