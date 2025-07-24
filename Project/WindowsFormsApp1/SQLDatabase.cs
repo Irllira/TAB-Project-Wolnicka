@@ -1,4 +1,6 @@
-﻿namespace WindowsFormsApp1
+﻿using System;
+
+namespace WindowsFormsApp1
 {
     internal class Person
     {
@@ -42,7 +44,7 @@
         public Doctor doctorID;
         public Receptionist receptionistID { get; set; }
 
-
+        public DateTime date { get; set; }
     }
 
     internal class User
@@ -52,6 +54,8 @@
         public char active { get; set; }
         public string role { get; set; }
         public int staffID { get; set; }
+
+        public string salt { get; set; }
     }
 
     internal class ExamDictionary

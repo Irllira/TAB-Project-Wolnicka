@@ -7,6 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Security.Cryptography;
+
+
 
 namespace WindowsFormsApp1
 {
@@ -18,7 +21,6 @@ namespace WindowsFormsApp1
             InitializeComponent();
         }
 
-
         private void button1_Click(object sender, EventArgs e)
         {
             if (tbConfPass.Text != tbPassword.Text)
@@ -27,8 +29,8 @@ namespace WindowsFormsApp1
                 lWarning.Show();
                 return;
             }
-            if (tbPassword.Text == "" || tbConfPass.Text == "" || tbLogin.Text == "" ||
-                tbFirstName.Text == "" || tbLastName.Text == "" || tbSex.Text == "")
+            if ((tbPassword.Text == "" || tbConfPass.Text == "" || tbLogin.Text == "") ||
+                ((tbFirstName.Text == "" || tbLastName.Text == "" || tbSex.Text == "")&& comboBox1.SelectedIndex!=2))
             {
                 lWarning.Text = "All the data needs to be filled";
                 lWarning.Show();
@@ -40,9 +42,20 @@ namespace WindowsFormsApp1
                 lWarning.Show();
                 return;
             }
-
-
             DAO myDAO = new DAO();
+
+            if(myDAO.CheckUserName(tbLogin.Text))
+            {
+                lWarning.Text = "Choose different username, \nthis one is taken";
+                lWarning.Show();
+                return;
+            }
+
+            Hasher hasher = new Hasher();
+            string salt = hasher.CreateSalt(12);
+            string password = hasher.HashPassword(tbPassword.Text, salt);
+
+          
             int i;
 
             switch (comboBox1.SelectedIndex)
@@ -50,15 +63,15 @@ namespace WindowsFormsApp1
                 case 0:
                     myDAO.AddDoctor(tbFirstName.Text,tbLastName.Text,tbSex.Text[0],tbNationalID.Text,tbNPWZ.Text);
                     i = myDAO.FindDoctorID();
-                    myDAO.AddUser(tbLogin.Text, tbPassword.Text, "DOCTOR",i);
+                    myDAO.AddUser(tbLogin.Text, password, "DOCTOR",i, salt);
                     break;
                 case 1:
                     myDAO.AddReceptionist(tbFirstName.Text, tbLastName.Text, tbSex.Text[0], tbNationalID.Text);
                     i = myDAO.FindReceptionistID();
-                    myDAO.AddUser(tbLogin.Text, tbPassword.Text, "RECEPT", i);
+                    myDAO.AddUser(tbLogin.Text, password, "RECEPT", i, salt);
                     break;
                 case 2:
-                    myDAO.AddUser(tbLogin.Text, tbPassword.Text, "ADMIN");
+                    myDAO.AddUser(tbLogin.Text, password, "ADMIN", salt);
                     break;
             }
             lWarning.Text = "User added succesfully";
@@ -120,3 +133,4 @@ namespace WindowsFormsApp1
         }
     }
 }
+

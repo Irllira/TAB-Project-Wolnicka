@@ -35,8 +35,9 @@ namespace WindowsFormsApp1
             this.lLogin = new System.Windows.Forms.Label();
             this.lPassword = new System.Windows.Forms.Label();
             this.lIncorrect = new System.Windows.Forms.Label();
-            this.pPanel = new System.Windows.Forms.Panel();
             this.bLogOut = new System.Windows.Forms.Button();
+            this.pPanel = new System.Windows.Forms.Panel();
+            this.cbPassword = new System.Windows.Forms.CheckBox();
             this.pPanel.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -106,14 +107,6 @@ namespace WindowsFormsApp1
             this.lIncorrect.Tag = "";
             this.lIncorrect.Text = "Incorrect Login or Password";
             // 
-            // pPanel
-            // 
-            this.pPanel.Controls.Add(this.bLogOut);
-            this.pPanel.Location = new System.Drawing.Point(5, 5);
-            this.pPanel.Name = "pPanel";
-            this.pPanel.Size = new System.Drawing.Size(964, 510);
-            this.pPanel.TabIndex = 6;
-            // 
             // bLogOut
             // 
             this.bLogOut.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
@@ -125,12 +118,34 @@ namespace WindowsFormsApp1
             this.bLogOut.UseVisualStyleBackColor = false;
             this.bLogOut.Click += new System.EventHandler(this.bLogOut_Click);
             // 
+            // pPanel
+            // 
+            this.pPanel.Controls.Add(this.bLogOut);
+            this.pPanel.Location = new System.Drawing.Point(5, 12);
+            this.pPanel.Name = "pPanel";
+            this.pPanel.Size = new System.Drawing.Size(964, 510);
+            this.pPanel.TabIndex = 6;
+            this.pPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.pPanel_Paint);
+            // 
+            // cbPassword
+            // 
+            this.cbPassword.AutoSize = true;
+            this.cbPassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.cbPassword.Location = new System.Drawing.Point(652, 174);
+            this.cbPassword.Name = "cbPassword";
+            this.cbPassword.Size = new System.Drawing.Size(145, 24);
+            this.cbPassword.TabIndex = 7;
+            this.cbPassword.Text = "Hide Password";
+            this.cbPassword.UseVisualStyleBackColor = true;
+            this.cbPassword.CheckedChanged += new System.EventHandler(this.cbPassword_CheckedChanged);
+            // 
             // LoginScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.ClientSize = new System.Drawing.Size(981, 517);
+            this.Controls.Add(this.cbPassword);
             this.Controls.Add(this.lIncorrect);
             this.Controls.Add(this.lPassword);
             this.Controls.Add(this.lLogin);
@@ -156,7 +171,8 @@ namespace WindowsFormsApp1
         private System.Windows.Forms.Label lLogin;
         private System.Windows.Forms.Label lPassword;
         private System.Windows.Forms.Label lIncorrect;
-        private System.Windows.Forms.Panel pPanel;
         private System.Windows.Forms.Button bLogOut;
+        private System.Windows.Forms.Panel pPanel;
+        private System.Windows.Forms.CheckBox cbPassword;
     }
 }

@@ -72,7 +72,7 @@ namespace WindowsFormsApp1
                 bFinish.Hide();
                 bSetUpExam.Hide();
             }
-
+            lDate.Text = visit.date.Year+ "-"+visit.date.Month + "-"+ visit.date.Day+"  "+ visit.date.Hour+":"+visit.date.Minute;
         }
         private void bConfirm_Click(object sender, EventArgs e)
         {

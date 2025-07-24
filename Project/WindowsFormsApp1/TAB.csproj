@@ -68,6 +68,7 @@
     <Compile Include="DoctorScreen.Designer.cs">
       <DependentUpon>DoctorScreen.cs</DependentUpon>
     </Compile>
+    <Compile Include="Haser.cs" />
     <Compile Include="NewPatientScreen.cs">
       <SubType>Form</SubType>
     </Compile>

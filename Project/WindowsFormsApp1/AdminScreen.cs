@@ -46,7 +46,7 @@ namespace WindowsFormsApp1
 
         private void AdminScreen_Load(object sender, EventArgs e)
         {
-            bDeactivate.Hide();
+            //bDeactivate.Hide();
         }
     }
 }

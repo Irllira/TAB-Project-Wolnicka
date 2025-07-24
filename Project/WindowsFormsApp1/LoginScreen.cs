@@ -13,6 +13,12 @@ namespace WindowsFormsApp1
 {
     public partial class LoginScreen : Form
     {
+        private void pPanel_Paint(object sender, PaintEventArgs e)
+        {
+            cbPassword.Checked = true;
+            tbPassword.UseSystemPasswordChar = false;
+        }
+
         public LoginScreen()
         {
             InitializeComponent();
@@ -26,15 +32,27 @@ namespace WindowsFormsApp1
                 return;
             }
 
+
             DAO myDao = new DAO();
             User u = myDao.FindUser(tbLogin.Text);
 
-            if (u.passwordName != tbPassword.Text)
+            Hasher hasher = new Hasher();
+
+            string password = hasher.HashPassword(tbPassword.Text, u.salt);
+
+
+            if ( u.passwordName != password)            //u.passwordName != tbPassword.Text &&
             {
                 lIncorrect.Show();
 
                 lIncorrect.Text = "Incorrect username or password";
 
+                return;
+            }
+            if(u.active=='0')
+            {
+                lIncorrect.Text = "User is currently not active, \ncontact to the administrator \nto activate the account";
+                lIncorrect.Show();
                 return;
             }
             Thread.Sleep(1000);
@@ -55,8 +73,6 @@ namespace WindowsFormsApp1
                     callAdmin();
                     break;
             }
-
-
 
         }
 
@@ -109,6 +125,7 @@ namespace WindowsFormsApp1
             lPassword.Hide();
             tbLogin.Hide();
             tbPassword.Hide();
+            cbPassword.Hide();
         }
 
         private void bLogOut_Click(object sender, EventArgs e)
@@ -122,6 +139,21 @@ namespace WindowsFormsApp1
             lPassword.Show();
             tbLogin.Show();
             tbPassword.Show();
+            cbPassword.Show();
+        }
+
+        private void cbPassword_CheckedChanged(object sender, EventArgs e)
+        {
+            if(cbPassword.Checked)
+            {
+                
+                tbPassword.PasswordChar = '*';
+            }else
+            {
+                
+                tbPassword.PasswordChar = (char)0;
+                
+            }
         }
     }
 }
