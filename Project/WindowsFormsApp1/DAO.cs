@@ -2,15 +2,14 @@
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
-using System.Text;
+using System.Configuration;
 using System.Threading.Tasks;
 
 namespace WindowsFormsApp1
 {
     internal class DAO
     {
-        string ConnectionString = "Data Source=DESKTOP-2HI6019;Initial Catalog=DOCTOR_OFFICE;Integrated Security=True;Persist Security Info=False;Pooling=False;MultipleActiveResultSets=False;Encrypt=False;TrustServerCertificate=False";
-
+        string ConnectionString = ConfigurationManager.ConnectionStrings["doctorDatabase"].ConnectionString;
 
         /*  public List<Visit> GetVisits()
           {
